@@ -1,10 +1,12 @@
 #include <stdio.h>
 
-void bubble_sort(int *arr, int size)
+#include "bubble_sort.h"
+
+bool bubble_sort(int *arr, int size)
 {
     if (arr == NULL)
     {
-        return;
+        return false;
     }
 
     for (int i = 0; i < size - 1; i++)
@@ -24,7 +26,9 @@ void bubble_sort(int *arr, int size)
 
         if (swapped == 0)
         {
-            return;
+            return true;
         }
     }
+
+    return true;
 }

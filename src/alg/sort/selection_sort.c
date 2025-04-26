@@ -1,10 +1,12 @@
 #include <stdlib.h>
 
-void selection_sort(int *arr, int size)
+#include "selection_sort.h"
+
+bool selection_sort(int *arr, int size)
 {
     if (arr == NULL)
     {
-        return;
+        return false;
     }
 
     for (int i = 0; i < size - 1; i++)
@@ -26,4 +28,6 @@ void selection_sort(int *arr, int size)
             arr[imin] = tmp;
         }
     }
+
+    return true;
 }

@@ -1,9 +1,11 @@
 #include <stdlib.h>
 
+#include "binary_search.h"
+
 // The Worst Case = O(log n)
 // The Best Case = Ω(1)
 
-int binarySearch(const int arr[], int start, int end, int target)
+int binary_search(const int arr[], int start, int end, int target)
 {
     if (arr == NULL)
     {

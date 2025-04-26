@@ -1,5 +1,7 @@
 #include <stdlib.h>
 
+#include "linear_search.h"
+
 // The Worst Case = O(n)
 // The Best Case = Ω(1)
 

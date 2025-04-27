@@ -2,6 +2,9 @@
 
 #include "merge_sort.h"
 
+// The Best Case = Ω(n log n)
+// The Worst Case = O(n log n)
+
 bool merge_sort(int *arr, int left, int right)
 {
     if (arr == NULL)

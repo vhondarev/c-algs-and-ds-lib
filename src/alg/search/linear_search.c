@@ -2,8 +2,8 @@
 
 #include "linear_search.h"
 
-// The Worst Case = O(n)
 // The Best Case = Ω(1)
+// The Worst Case = O(n)
 
 int linear_search(int *arr, int size, int target)
 {

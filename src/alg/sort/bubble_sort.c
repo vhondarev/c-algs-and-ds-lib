@@ -2,6 +2,9 @@
 
 #include "bubble_sort.h"
 
+// The Best Case = Ω(n)
+// The Worst Case = O(n^2)
+
 bool bubble_sort(int *arr, int size)
 {
     if (arr == NULL)

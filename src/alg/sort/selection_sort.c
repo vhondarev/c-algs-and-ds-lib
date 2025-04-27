@@ -2,6 +2,9 @@
 
 #include "selection_sort.h"
 
+// The Best Case = Ω(n^2)
+// The Worst Case = O(n^2)
+
 bool selection_sort(int *arr, int size)
 {
     if (arr == NULL)

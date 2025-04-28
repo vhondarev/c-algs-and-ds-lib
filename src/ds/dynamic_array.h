@@ -17,7 +17,7 @@ bool dyn_int_arr_init_mem(dyn_int_arr_s *arr);
 
 int dyn_int_arr_realloc_mem(dyn_int_arr_s *arr);
 
-bool dyn_int_arr_destroy(dyn_int_arr_s *arr);
+void dyn_int_arr_destroy(dyn_int_arr_s *arr);
 
 bool dyn_int_arr_append(dyn_int_arr_s *arr, int value);
 

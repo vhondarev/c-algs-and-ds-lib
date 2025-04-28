@@ -10,7 +10,7 @@ I'm building this mostly to practice my C skills.
 #### Fundamental
 
 - [x] Dynamic Array (with resizing)
-- [ ] Linked List (singly and doubly)
+- [x] Linked List (singly and doubly)
 - [ ] Stack
 - [ ] Queue
 - [ ] Circular Queue

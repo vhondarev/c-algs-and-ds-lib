@@ -59,16 +59,16 @@ int dyn_int_arr_realloc_mem(dyn_int_arr_s *arr)
     return 1;
 }
 
-bool dyn_int_arr_destroy(dyn_int_arr_s *arr)
+void dyn_int_arr_destroy(dyn_int_arr_s *arr)
 {
     if (arr != NULL)
     {
         free(arr->data);
+        arr->data = NULL;
         free(arr);
-        return true;
     }
 
-    return false;
+    return;
 }
 
 bool dyn_int_arr_append(dyn_int_arr_s *arr, int value)

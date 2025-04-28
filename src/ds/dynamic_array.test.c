@@ -64,7 +64,7 @@ void assert_dyn_int_arr_append()
     assert(dyn_int_arr_append(NULL, 100) == false);
     printf("[OK] - Appending to NULL array returns false\n");
 
-    assert(dyn_int_arr_destroy(darr) == true);
+    dyn_int_arr_destroy(darr);
     printf("[OK] - Destroyed dynamic array\n");
 }
 
@@ -96,7 +96,7 @@ void assert_dyn_int_arr_prepend()
     assert(dyn_int_arr_prepend(NULL, 100) == false);
     printf("[OK] - Prepend to NULL array returns false\n");
 
-    assert(dyn_int_arr_destroy(darr) == true);
+    dyn_int_arr_destroy(darr);
     printf("[OK] - Destroyed dynamic array\n");
 }
 

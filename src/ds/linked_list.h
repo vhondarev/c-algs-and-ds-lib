@@ -16,6 +16,10 @@ typedef struct
     unsigned int total;
 } linked_list_s;
 
+node_s *create_node(void *data);
+
+void destroy_node(node_s *node);
+
 linked_list_s *linked_list_create();
 
 void linked_list_destroy(linked_list_s *ll);
@@ -23,5 +27,11 @@ void linked_list_destroy(linked_list_s *ll);
 bool linked_list_append(linked_list_s *ll, node_s *node);
 
 bool linked_list_prepend(linked_list_s *ll, node_s *node);
+
+bool linked_list_insert(linked_list_s *ll, node_s *node, int pos);
+
+bool linked_list_delete(linked_list_s *ll, int pos);
+
+node_s *linked_list_get_node(linked_list_s *ll, int pos);
 
 #endif

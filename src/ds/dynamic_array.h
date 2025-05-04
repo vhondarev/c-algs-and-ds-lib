@@ -6,21 +6,21 @@
 
 typedef struct
 {
-    int *data;
+    void **data;
     size_t size;
     size_t capacity;
-} dyn_int_arr_s;
+} dyn_arr_s;
 
-dyn_int_arr_s *dyn_int_arr_create();
+dyn_arr_s *dyn_arr_create();
 
-bool dyn_int_arr_init_mem(dyn_int_arr_s *arr);
+bool dyn_arr_init_mem(dyn_arr_s *arr);
 
-int dyn_int_arr_realloc_mem(dyn_int_arr_s *arr);
+int dyn_arr_realloc_mem(dyn_arr_s *arr);
 
-void dyn_int_arr_destroy(dyn_int_arr_s *arr);
+void dyn_arr_destroy(dyn_arr_s *arr);
 
-bool dyn_int_arr_append(dyn_int_arr_s *arr, int value);
+bool dyn_arr_append(dyn_arr_s *arr, void *value);
 
-bool dyn_int_arr_prepend(dyn_int_arr_s *arr, int value);
+bool dyn_arr_prepend(dyn_arr_s *arr, void *value);
 
 #endif

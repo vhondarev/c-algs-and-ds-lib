@@ -1,9 +1,10 @@
 #include "dynamic_array.h"
 #include <stdlib.h>
 
-dyn_int_arr_s *dyn_int_arr_create()
+dyn_arr_s *dyn_arr_create()
 {
-    dyn_int_arr_s *arr = malloc(sizeof(dyn_int_arr_s));
+    dyn_arr_s *arr = malloc(sizeof(dyn_arr_s));
+
     if (arr == NULL)
     {
         return NULL;
@@ -16,35 +17,35 @@ dyn_int_arr_s *dyn_int_arr_create()
     return arr;
 }
 
-bool dyn_int_arr_init_mem(dyn_int_arr_s *arr)
+bool dyn_arr_init_mem(dyn_arr_s *arr)
 {
     if (arr == NULL || arr->data != NULL)
     {
         return false;
     }
-    else
-    {
-        arr->capacity = 2;
-        arr->data = malloc(arr->capacity * sizeof(int));
-        if (arr->data == NULL)
-        {
-            return false;
-        }
 
-        return true;
+    arr->capacity = 2;
+    arr->data = malloc(arr->capacity * sizeof(void *));
+
+    if (arr->data == NULL)
+    {
+        return false;
     }
+
+    return true;
 }
 
-int dyn_int_arr_realloc_mem(dyn_int_arr_s *arr)
+int dyn_arr_realloc_mem(dyn_arr_s *arr)
 {
     if (arr == NULL || arr->capacity == 0)
     {
         return -1;
     }
-    else if (arr->size >= arr->capacity)
+
+    if (arr->size >= arr->capacity)
     {
-        int nsize = arr->capacity * 2;
-        int *ndata = realloc(arr->data, sizeof(int) * nsize);
+        size_t nsize = arr->capacity * 2;
+        void **ndata = realloc(arr->data, nsize * sizeof(void *));
 
         if (ndata == NULL)
         {
@@ -53,13 +54,13 @@ int dyn_int_arr_realloc_mem(dyn_int_arr_s *arr)
 
         arr->capacity = nsize;
         arr->data = ndata;
-
         return 0;
     }
+
     return 1;
 }
 
-void dyn_int_arr_destroy(dyn_int_arr_s *arr)
+void dyn_arr_destroy(dyn_arr_s *arr)
 {
     if (arr != NULL)
     {
@@ -67,11 +68,9 @@ void dyn_int_arr_destroy(dyn_int_arr_s *arr)
         arr->data = NULL;
         free(arr);
     }
-
-    return;
 }
 
-bool dyn_int_arr_append(dyn_int_arr_s *arr, int value)
+bool dyn_arr_append(dyn_arr_s *arr, void *value)
 {
     if (arr == NULL)
     {
@@ -79,7 +78,7 @@ bool dyn_int_arr_append(dyn_int_arr_s *arr, int value)
     }
     else if (arr->data == NULL)
     {
-        bool r = dyn_int_arr_init_mem(arr);
+        bool r = dyn_arr_init_mem(arr);
         if (!r)
         {
             return r;
@@ -87,7 +86,7 @@ bool dyn_int_arr_append(dyn_int_arr_s *arr, int value)
     }
     else
     {
-        int r = dyn_int_arr_realloc_mem(arr);
+        int r = dyn_arr_realloc_mem(arr);
         if (r == -1)
         {
             return false;
@@ -99,7 +98,7 @@ bool dyn_int_arr_append(dyn_int_arr_s *arr, int value)
     return true;
 }
 
-bool dyn_int_arr_prepend(dyn_int_arr_s *arr, int value)
+bool dyn_arr_prepend(dyn_arr_s *arr, void *value)
 {
     if (arr == NULL)
     {
@@ -107,7 +106,7 @@ bool dyn_int_arr_prepend(dyn_int_arr_s *arr, int value)
     }
     else if (arr->data == NULL)
     {
-        bool r = dyn_int_arr_init_mem(arr);
+        bool r = dyn_arr_init_mem(arr);
         if (!r)
         {
             return r;
@@ -115,7 +114,7 @@ bool dyn_int_arr_prepend(dyn_int_arr_s *arr, int value)
     }
     else
     {
-        int r = dyn_int_arr_realloc_mem(arr);
+        int r = dyn_arr_realloc_mem(arr);
         if (r == -1)
         {
             return false;

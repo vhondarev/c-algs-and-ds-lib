@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-
 #include "linked_list.h"
 
 node_s *create_node(void *data)
@@ -27,9 +24,9 @@ void destroy_node(node_s *node)
     free(node);
 }
 
-linked_list_s *linked_list_create()
+ll_s *ll_create()
 {
-    linked_list_s *ll = malloc(sizeof(linked_list_s));
+    ll_s *ll = malloc(sizeof(ll_s));
     if (ll == NULL)
     {
         return NULL;
@@ -42,7 +39,7 @@ linked_list_s *linked_list_create()
     return ll;
 }
 
-void linked_list_destroy(linked_list_s *ll)
+void ll_destroy(ll_s *ll)
 {
     if (ll == NULL)
     {
@@ -66,7 +63,7 @@ void linked_list_destroy(linked_list_s *ll)
     return;
 }
 
-bool linked_list_append(linked_list_s *ll, node_s *node)
+bool ll_append(ll_s *ll, node_s *node)
 {
     if (ll == NULL || node == NULL)
     {
@@ -91,7 +88,7 @@ bool linked_list_append(linked_list_s *ll, node_s *node)
     }
 }
 
-bool linked_list_prepend(linked_list_s *ll, node_s *node)
+bool ll_prepend(ll_s *ll, node_s *node)
 {
     if (ll == NULL || node == NULL)
     {
@@ -114,7 +111,7 @@ bool linked_list_prepend(linked_list_s *ll, node_s *node)
     }
 }
 
-bool linked_list_insert(linked_list_s *ll, node_s *node, int pos)
+bool ll_insert(ll_s *ll, node_s *node, size_t pos)
 {
     if (ll == NULL || node == NULL || pos < 0 || pos > ll->total)
     {
@@ -122,18 +119,18 @@ bool linked_list_insert(linked_list_s *ll, node_s *node, int pos)
     }
     else if (pos == 0 || ll->head == NULL)
     {
-        return linked_list_prepend(ll, node);
+        return ll_prepend(ll, node);
     }
     else if (pos == ll->total)
     {
-        return linked_list_append(ll, node);
+        return ll_append(ll, node);
     }
     else
     {
         node_s *prev = ll->head;
         node_s *next = prev->next;
 
-        for (int i = 1; i < pos; i++)
+        for (size_t i = 1; i < pos; i++)
         {
             prev = prev->next;
             next = next->next;
@@ -147,7 +144,7 @@ bool linked_list_insert(linked_list_s *ll, node_s *node, int pos)
     }
 }
 
-bool linked_list_delete(linked_list_s *ll, int pos)
+bool ll_delete(ll_s *ll, size_t pos)
 {
     if (ll == NULL || ll->head == NULL || pos < 0 || pos >= ll->total)
     {
@@ -170,7 +167,7 @@ bool linked_list_delete(linked_list_s *ll, int pos)
     {
         node_s *prev = ll->head;
 
-        for (int i = 1; i < pos; i++)
+        for (size_t i = 1; i < pos; i++)
         {
             prev = prev->next;
         }
@@ -190,7 +187,7 @@ bool linked_list_delete(linked_list_s *ll, int pos)
     return true;
 }
 
-node_s *linked_list_get_node(linked_list_s *ll, int pos)
+node_s *ll_get_node_at(ll_s *ll, size_t pos)
 {
     if (ll == NULL || ll->head == NULL || pos >= ll->total || pos < 0)
     {
@@ -199,7 +196,7 @@ node_s *linked_list_get_node(linked_list_s *ll, int pos)
 
     node_s *node = ll->head;
 
-    for (int i = 0; i < pos; i++)
+    for (size_t i = 0; i < pos; i++)
     {
         node = node->next;
     }

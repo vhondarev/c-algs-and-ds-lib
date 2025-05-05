@@ -1,35 +1,37 @@
-#include <stdio.h>
-
 #include "bubble_sort.h"
 
 // The Best Case = Ω(n)
 // The Worst Case = O(n^2)
 
-bool bubble_sort(int *arr, int size)
+bool bubble_sort(int *arr, size_t size)
 {
-    if (arr == NULL)
+    if (arr == NULL || size < 0)
     {
         return false;
     }
 
-    for (int i = 0; i < size - 1; i++)
+    if (size != 0)
     {
-        int swapped = 0;
 
-        for (int j = 0; j < size - i - 1; j++)
+        for (size_t i = 0; i < size - 1; i++)
         {
-            if (arr[j] > arr[j + 1])
+            int swapped = 0;
+
+            for (size_t j = 0; j < size - i - 1; j++)
             {
-                int temp = arr[j];
-                arr[j] = arr[j + 1];
-                arr[j + 1] = temp;
-                swapped = 1;
+                if (arr[j] > arr[j + 1])
+                {
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                    swapped = 1;
+                }
             }
-        }
 
-        if (swapped == 0)
-        {
-            return true;
+            if (swapped == 0)
+            {
+                return true;
+            }
         }
     }
 

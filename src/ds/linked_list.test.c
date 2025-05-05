@@ -1,6 +1,5 @@
 #include <assert.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 #include "linked_list.h"
 
@@ -49,35 +48,35 @@ void assert_destroy_node()
     printf("[OK] - Destroyed node with NULL data\n");
 }
 
-void assert_linked_list_create()
+void assert_ll_create()
 {
-    linked_list_s *ll = linked_list_create();
+    ll_s *ll = ll_create();
     assert(ll != NULL);
     assert(ll->head == NULL);
     assert(ll->tail == NULL);
     assert(ll->total == 0);
-    linked_list_destroy(ll);
+    ll_destroy(ll);
     printf("[OK] - Created empty linked list\n");
 }
 
-void assert_linked_list_destroy()
+void assert_ll_destroy()
 {
-    linked_list_s *ll = linked_list_create();
+    ll_s *ll = ll_create();
     int *data = malloc(sizeof(int));
     *data = 10;
 
     node_s *node = create_node(data);
-    linked_list_append(ll, node);
-    linked_list_destroy(ll);
+    ll_append(ll, node);
+    ll_destroy(ll);
     printf("[OK] - Destroyed linked list with one node\n");
 
-    linked_list_destroy(NULL);
+    ll_destroy(NULL);
     printf("[OK] - Destroying NULL linked list handled gracefully\n");
 }
 
-void assert_linked_list_append()
+void assert_ll_append()
 {
-    linked_list_s *ll = linked_list_create();
+    ll_s *ll = ll_create();
     int *data1 = malloc(sizeof(int));
     int *data2 = malloc(sizeof(int));
     *data1 = 10;
@@ -85,34 +84,34 @@ void assert_linked_list_append()
     node_s *node1 = create_node(data1);
     node_s *node2 = create_node(data2);
 
-    assert(linked_list_append(ll, NULL) == false);
+    assert(ll_append(ll, NULL) == false);
     assert(ll->head == NULL);
     assert(ll->tail == NULL);
     assert(ll->total == 0);
     printf("[OK] - Appending NULL node returns false\n");
 
-    assert(linked_list_append(NULL, node1) == false);
+    assert(ll_append(NULL, node1) == false);
     printf("[OK] - Appending to NULL list returns false\n");
 
-    assert(linked_list_append(ll, node1) == true);
+    assert(ll_append(ll, node1) == true);
     assert(ll->head == node1);
     assert(ll->tail == node1);
     assert(ll->total == 1);
     printf("[OK] - Appended first node to empty list\n");
 
-    assert(linked_list_append(ll, node2) == true);
+    assert(ll_append(ll, node2) == true);
     assert(ll->head == node1);
     assert(ll->tail == node2);
     assert(node1->next == node2);
     assert(ll->total == 2);
     printf("[OK] - Appended second node to list\n");
 
-    linked_list_destroy(ll);
+    ll_destroy(ll);
 }
 
-void assert_linked_list_prepend()
+void assert_ll_prepend()
 {
-    linked_list_s *ll = linked_list_create();
+    ll_s *ll = ll_create();
     int *data1 = malloc(sizeof(int));
     int *data2 = malloc(sizeof(int));
     *data1 = 10;
@@ -120,31 +119,31 @@ void assert_linked_list_prepend()
     node_s *node1 = create_node(data1);
     node_s *node2 = create_node(data2);
 
-    assert(linked_list_prepend(ll, NULL) == false);
+    assert(ll_prepend(ll, NULL) == false);
     assert(ll->head == NULL);
     assert(ll->tail == NULL);
     assert(ll->total == 0);
     printf("[OK] - Prepending NULL node returns false\n");
 
-    assert(linked_list_prepend(ll, node1) == true);
+    assert(ll_prepend(ll, node1) == true);
     assert(ll->head == node1);
     assert(ll->tail == node1);
     assert(ll->total == 1);
     printf("[OK] - Prepended first node to empty list\n");
 
-    assert(linked_list_prepend(ll, node2) == true);
+    assert(ll_prepend(ll, node2) == true);
     assert(ll->head == node2);
     assert(ll->tail == node1);
     assert(node2->next == node1);
     assert(ll->total == 2);
     printf("[OK] - Prepended node to non-empty list\n");
 
-    linked_list_destroy(ll);
+    ll_destroy(ll);
 }
 
-void assert_linked_list_insert()
+void assert_ll_insert()
 {
-    linked_list_s *ll = linked_list_create();
+    ll_s *ll = ll_create();
     int *d1 = malloc(sizeof(int));
     int *d2 = malloc(sizeof(int));
     int *d3 = malloc(sizeof(int));
@@ -159,52 +158,52 @@ void assert_linked_list_insert()
     node_s *n3 = create_node(d3);
     node_s *nmid = create_node(dmid);
 
-    assert(linked_list_insert(NULL, n1, 0) == false);
-    assert(linked_list_insert(ll, NULL, 0) == false);
-    assert(linked_list_insert(ll, n1, -1) == false);
-    assert(linked_list_insert(ll, n1, 1) == false); // total is 0
+    assert(ll_insert(NULL, n1, 0) == false);
+    assert(ll_insert(ll, NULL, 0) == false);
+    assert(ll_insert(ll, n1, -1) == false);
+    assert(ll_insert(ll, n1, 1) == false); // total is 0
     printf("[OK] - Invalid insertions handled correctly\n");
 
-    assert(linked_list_insert(ll, n1, 0) == true);
+    assert(ll_insert(ll, n1, 0) == true);
     assert(ll->head == n1);
     assert(ll->tail == n1);
     assert(ll->total == 1);
     printf("[OK] - Insert at position 0 (prepend) succeeded\n");
 
-    assert(linked_list_insert(ll, n3, 1) == true);
+    assert(ll_insert(ll, n3, 1) == true);
     assert(ll->head == n1);
     assert(ll->tail == n3);
     assert(ll->total == 2);
     printf("[OK] - Insert at position total (append) succeeded\n");
 
-    assert(linked_list_insert(ll, nmid, 1) == true);
+    assert(ll_insert(ll, nmid, 1) == true);
     assert(ll->total == 3);
     assert(ll->head == n1);
     assert(n1->next == nmid);
     assert(nmid->next == n3);
     printf("[OK] - Insert in the middle of list succeeded\n");
 
-    assert(linked_list_insert(ll, n2, 3) == true); // position after n3
+    assert(ll_insert(ll, n2, 3) == true); // position after n3
     assert(ll->tail == n2);
     assert(ll->total == 4);
     assert(n3->next == n2);
     printf("[OK] - Insert at new tail succeeded\n");
 
-    linked_list_destroy(ll);
+    ll_destroy(ll);
 }
 
-void assert_linked_list_get_node()
+void assert_ll_get_node()
 {
-    assert(linked_list_get_node(NULL, 0) == NULL);
+    assert(ll_get_node_at(NULL, 0) == NULL);
     printf("[OK] - Get node from NULL list returns NULL\n");
 
-    linked_list_s *ll_empty = linked_list_create();
-    assert(linked_list_get_node(ll_empty, 0) == NULL);
+    ll_s *ll_empty = ll_create();
+    assert(ll_get_node_at(ll_empty, 0) == NULL);
     printf("[OK] - Get node from empty list returns NULL\n");
 
-    linked_list_destroy(ll_empty);
+    ll_destroy(ll_empty);
 
-    linked_list_s *ll = linked_list_create();
+    ll_s *ll = ll_create();
 
     int *v1 = malloc(sizeof(int));
     int *v2 = malloc(sizeof(int));
@@ -217,44 +216,44 @@ void assert_linked_list_get_node()
     node_s *n2 = create_node(v2);
     node_s *n3 = create_node(v3);
 
-    linked_list_append(ll, n1);
-    linked_list_append(ll, n2);
-    linked_list_append(ll, n3);
+    ll_append(ll, n1);
+    ll_append(ll, n2);
+    ll_append(ll, n3);
 
-    node_s *got = linked_list_get_node(ll, 0);
+    node_s *got = ll_get_node_at(ll, 0);
     assert(got == n1);
     assert(*(int *)got->data == 10);
     printf("[OK] - Get node at position 0\n");
 
-    got = linked_list_get_node(ll, 1);
+    got = ll_get_node_at(ll, 1);
     assert(got == n2);
     assert(*(int *)got->data == 20);
     printf("[OK] - Get node at position 1\n");
 
-    got = linked_list_get_node(ll, 2);
+    got = ll_get_node_at(ll, 2);
     assert(got == n3);
     assert(*(int *)got->data == 30);
     printf("[OK] - Get node at position 2\n");
 
-    assert(linked_list_get_node(ll, 3) == NULL);
+    assert(ll_get_node_at(ll, 3) == NULL);
     printf("[OK] - Get node at out-of-bounds index returns NULL\n");
 
-    assert(linked_list_get_node(ll, -1) == NULL);
+    assert(ll_get_node_at(ll, -1) == NULL);
     printf("[OK] - Get node at negative index returns NULL\n");
 
-    linked_list_destroy(ll);
+    ll_destroy(ll);
 }
 
 int main()
 {
     assert_create_node();
     assert_destroy_node();
-    assert_linked_list_create();
-    assert_linked_list_destroy();
-    assert_linked_list_append();
-    assert_linked_list_prepend();
-    assert_linked_list_insert();
-    assert_linked_list_get_node();
+    assert_ll_create();
+    assert_ll_destroy();
+    assert_ll_append();
+    assert_ll_prepend();
+    assert_ll_insert();
+    assert_ll_get_node();
 
     return EXIT_SUCCESS;
 }

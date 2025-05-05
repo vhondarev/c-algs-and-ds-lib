@@ -23,4 +23,8 @@ bool dyn_arr_append(dyn_arr_s *arr, void *value);
 
 bool dyn_arr_prepend(dyn_arr_s *arr, void *value);
 
+bool dyn_arr_remove_at(dyn_arr_s *arr, size_t index);
+
+void *dyn_arr_get_at(dyn_arr_s *arr, size_t index);
+
 #endif

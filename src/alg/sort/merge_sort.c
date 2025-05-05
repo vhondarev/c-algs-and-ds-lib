@@ -1,25 +1,23 @@
-#include <stdlib.h>
-
 #include "merge_sort.h"
 
 // The Best Case = Ω(n log n)
 // The Worst Case = O(n log n)
 
-bool merge_sort(int *arr, int left, int right)
+bool merge_sort(int *arr, size_t left, size_t right)
 {
-    if (arr == NULL)
+    if (arr == NULL || left < 0 || right < 0)
     {
         return false;
     }
 
-    if (left >= right - 1)
+    if ((left == 0 && right == 0) || left >= right - 1)
     {
         return true;
     }
 
-    int mid = left + (right - left) / 2;
-    int lsize = mid - left;
-    int rsize = right - mid;
+    size_t mid = left + (right - left) / 2;
+    size_t lsize = mid - left;
+    size_t rsize = right - mid;
 
     int *larr = calloc(lsize, sizeof(int));
     int *rarr = calloc(rsize, sizeof(int));
@@ -44,7 +42,7 @@ bool merge_sort(int *arr, int left, int right)
         return false;
     }
 
-    int i = 0, j = 0, m = left;
+    size_t i = 0, j = 0, m = left;
     while (i < lsize && j < rsize)
     {
         if (larr[i] < rarr[j])

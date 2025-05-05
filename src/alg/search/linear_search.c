@@ -5,14 +5,14 @@
 // The Best Case = Ω(1)
 // The Worst Case = O(n)
 
-int linear_search(int *arr, int size, int target)
+int linear_search(int *arr, ssize_t size, int target)
 {
-    if (arr == NULL)
+    if (arr == NULL || size < 0)
     {
         return -1;
     }
 
-    for (int i = 0; i < size; i++)
+    for (size_t i = 0; i < size; i++)
     {
         if (i == target)
         {

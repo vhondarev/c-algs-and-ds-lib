@@ -11,8 +11,8 @@ I'm building this mostly to practice my C skills.
 
 - [x] Dynamic Array (with resizing)
 - [x] Linked List (singly and doubly)
-- [ ] Stack
-- [ ] Queue
+- [x] Stack
+- [x] Queue
 - [ ] Circular Queue
 - [ ] Priority Queue
 

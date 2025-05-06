@@ -8,7 +8,7 @@ void assert_create_node()
     int *value = malloc(sizeof(int));
     *value = 123;
 
-    node_s *node = create_node(value);
+    ll_node_s *node = ll_create_node(value);
     assert(node != NULL);
     assert(node->data == value);
     assert(node->next == NULL);
@@ -17,7 +17,7 @@ void assert_create_node()
     free(value);
     free(node);
 
-    node_s *null_data_node = create_node(NULL);
+    ll_node_s *null_data_node = ll_create_node(NULL);
     assert(null_data_node != NULL);
     assert(null_data_node->data == NULL);
     assert(null_data_node->next == NULL);
@@ -28,23 +28,23 @@ void assert_create_node()
 
 void assert_destroy_node()
 {
-    destroy_node(NULL);
+    ll_destroy_node(NULL);
     printf("[OK] - Destroying NULL node handled gracefully\n");
 
     int *data = malloc(sizeof(int));
     *data = 42;
-    node_s *node_with_data = malloc(sizeof(node_s));
+    ll_node_s *node_with_data = malloc(sizeof(ll_node_s));
     node_with_data->data = data;
     node_with_data->next = NULL;
 
-    destroy_node(node_with_data);
+    ll_destroy_node(node_with_data);
     printf("[OK] - Destroyed node with non-NULL data\n");
 
-    node_s *node_without_data = malloc(sizeof(node_s));
+    ll_node_s *node_without_data = malloc(sizeof(ll_node_s));
     node_without_data->data = NULL;
     node_without_data->next = NULL;
 
-    destroy_node(node_without_data);
+    ll_destroy_node(node_without_data);
     printf("[OK] - Destroyed node with NULL data\n");
 }
 
@@ -65,7 +65,7 @@ void assert_ll_destroy()
     int *data = malloc(sizeof(int));
     *data = 10;
 
-    node_s *node = create_node(data);
+    ll_node_s *node = ll_create_node(data);
     ll_append(ll, node);
     ll_destroy(ll);
     printf("[OK] - Destroyed linked list with one node\n");
@@ -81,8 +81,8 @@ void assert_ll_append()
     int *data2 = malloc(sizeof(int));
     *data1 = 10;
     *data2 = 10;
-    node_s *node1 = create_node(data1);
-    node_s *node2 = create_node(data2);
+    ll_node_s *node1 = ll_create_node(data1);
+    ll_node_s *node2 = ll_create_node(data2);
 
     assert(ll_append(ll, NULL) == false);
     assert(ll->head == NULL);
@@ -116,8 +116,8 @@ void assert_ll_prepend()
     int *data2 = malloc(sizeof(int));
     *data1 = 10;
     *data2 = 10;
-    node_s *node1 = create_node(data1);
-    node_s *node2 = create_node(data2);
+    ll_node_s *node1 = ll_create_node(data1);
+    ll_node_s *node2 = ll_create_node(data2);
 
     assert(ll_prepend(ll, NULL) == false);
     assert(ll->head == NULL);
@@ -153,10 +153,10 @@ void assert_ll_insert()
     *d3 = 3;
     *dmid = 99;
 
-    node_s *n1 = create_node(d1);
-    node_s *n2 = create_node(d2);
-    node_s *n3 = create_node(d3);
-    node_s *nmid = create_node(dmid);
+    ll_node_s *n1 = ll_create_node(d1);
+    ll_node_s *n2 = ll_create_node(d2);
+    ll_node_s *n3 = ll_create_node(d3);
+    ll_node_s *nmid = ll_create_node(dmid);
 
     assert(ll_insert(NULL, n1, 0) == false);
     assert(ll_insert(ll, NULL, 0) == false);
@@ -212,15 +212,15 @@ void assert_ll_get_node()
     *v2 = 20;
     *v3 = 30;
 
-    node_s *n1 = create_node(v1);
-    node_s *n2 = create_node(v2);
-    node_s *n3 = create_node(v3);
+    ll_node_s *n1 = ll_create_node(v1);
+    ll_node_s *n2 = ll_create_node(v2);
+    ll_node_s *n3 = ll_create_node(v3);
 
     ll_append(ll, n1);
     ll_append(ll, n2);
     ll_append(ll, n3);
 
-    node_s *got = ll_get_node_at(ll, 0);
+    ll_node_s *got = ll_get_node_at(ll, 0);
     assert(got == n1);
     assert(*(int *)got->data == 10);
     printf("[OK] - Get node at position 0\n");

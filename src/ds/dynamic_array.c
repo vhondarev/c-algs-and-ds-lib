@@ -47,8 +47,8 @@ int dyn_arr_realloc_mem(dyn_arr_s *arr)
 
     if (arr->size >= arr->capacity || should_decrease)
     {
-
         size_t nsize;
+
         if (should_decrease)
         {
             nsize = (size_t)(arr->capacity * 0.5);
@@ -67,6 +67,7 @@ int dyn_arr_realloc_mem(dyn_arr_s *arr)
 
         arr->capacity = nsize;
         arr->data = ndata;
+
         return 0;
     }
 
@@ -124,6 +125,7 @@ bool dyn_arr_prepend(dyn_arr_s *arr, void *value)
             return false;
         }
     }
+
     if (dyn_arr_realloc_mem(arr) == -1)
     {
         return false;
@@ -139,7 +141,7 @@ bool dyn_arr_prepend(dyn_arr_s *arr, void *value)
     return true;
 }
 
-bool dyn_arr_remove_at(dyn_arr_s *arr, size_t index)
+bool dyn_arr_remove_at(dyn_arr_s *arr, int index)
 {
     if (arr == NULL || arr->data == NULL || arr->size <= index)
     {
@@ -161,7 +163,7 @@ bool dyn_arr_remove_at(dyn_arr_s *arr, size_t index)
     return true;
 }
 
-void *dyn_arr_get_at(dyn_arr_s *arr, size_t index)
+void *dyn_arr_get_at(dyn_arr_s *arr, int index)
 {
     if (arr == NULL || arr->data == NULL || arr->size <= index)
     {

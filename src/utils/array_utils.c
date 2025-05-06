@@ -11,7 +11,7 @@ void arr_int_print(int *arr, size_t size)
     }
 }
 
-bool arr_int_cmp(const int *arr1, const int *arr2, size_t arr1_size, size_t arr2_size)
+bool arr_int_cmp(const int *arr1, const int *arr2, int arr1_size, int arr2_size)
 {
     if (arr1_size != arr2_size || (arr1 == NULL && arr2 != NULL) || (arr1 != NULL && arr2 == NULL))
     {
@@ -35,7 +35,7 @@ bool arr_int_cmp(const int *arr1, const int *arr2, size_t arr1_size, size_t arr2
 
 // UNSAFE: This function copies a portion of arr_source to arr_target WITHOUT bounds checking on
 // arr_source or arr_target.
-bool arr_int_cpy(const int *arr_source, int *arr_target, size_t start_index, size_t end_index)
+bool arr_int_cpy(const int *arr_source, int *arr_target, int start_index, int end_index)
 {
     if (arr_source == NULL || arr_target == NULL || start_index < 0 || start_index > end_index)
     {

@@ -1,15 +1,15 @@
 #include "linked_list.h"
 
-node_s *create_node(void *data)
+ll_node_s *ll_create_node(void *data)
 {
-    node_s *node = malloc(sizeof(node_s));
+    ll_node_s *node = malloc(sizeof(ll_node_s));
     node->data = data;
     node->next = NULL;
 
     return node;
 }
 
-void destroy_node(node_s *node)
+void ll_destroy_node(ll_node_s *node)
 {
     if (node == NULL)
     {
@@ -48,13 +48,13 @@ void ll_destroy(ll_s *ll)
 
     if (ll->head != NULL)
     {
-        node_s *current = ll->head;
-        node_s *next;
+        ll_node_s *current = ll->head;
+        ll_node_s *next;
 
         while (current != NULL)
         {
             next = current->next;
-            destroy_node(current);
+            ll_destroy_node(current);
             current = next;
         }
     }
@@ -63,7 +63,7 @@ void ll_destroy(ll_s *ll)
     return;
 }
 
-bool ll_append(ll_s *ll, node_s *node)
+bool ll_append(ll_s *ll, ll_node_s *node)
 {
     if (ll == NULL || node == NULL)
     {
@@ -79,7 +79,7 @@ bool ll_append(ll_s *ll, node_s *node)
     }
     else
     {
-        node_s *last = ll->tail;
+        ll_node_s *last = ll->tail;
         last->next = node;
         ll->tail = node;
         ll->total++;
@@ -88,7 +88,7 @@ bool ll_append(ll_s *ll, node_s *node)
     }
 }
 
-bool ll_prepend(ll_s *ll, node_s *node)
+bool ll_prepend(ll_s *ll, ll_node_s *node)
 {
     if (ll == NULL || node == NULL)
     {
@@ -111,7 +111,7 @@ bool ll_prepend(ll_s *ll, node_s *node)
     }
 }
 
-bool ll_insert(ll_s *ll, node_s *node, size_t pos)
+bool ll_insert(ll_s *ll, ll_node_s *node, size_t pos)
 {
     if (ll == NULL || node == NULL || pos < 0 || pos > ll->total)
     {
@@ -127,8 +127,8 @@ bool ll_insert(ll_s *ll, node_s *node, size_t pos)
     }
     else
     {
-        node_s *prev = ll->head;
-        node_s *next = prev->next;
+        ll_node_s *prev = ll->head;
+        ll_node_s *next = prev->next;
 
         for (size_t i = 1; i < pos; i++)
         {
@@ -151,7 +151,7 @@ bool ll_delete(ll_s *ll, size_t pos)
         return false;
     }
 
-    node_s *tmp;
+    ll_node_s *tmp;
 
     if (pos == 0)
     {
@@ -165,7 +165,7 @@ bool ll_delete(ll_s *ll, size_t pos)
     }
     else
     {
-        node_s *prev = ll->head;
+        ll_node_s *prev = ll->head;
 
         for (size_t i = 1; i < pos; i++)
         {
@@ -181,20 +181,20 @@ bool ll_delete(ll_s *ll, size_t pos)
         }
     }
 
-    destroy_node(tmp);
+    ll_destroy_node(tmp);
     ll->total--;
 
     return true;
 }
 
-node_s *ll_get_node_at(ll_s *ll, size_t pos)
+ll_node_s *ll_get_node_at(ll_s *ll, size_t pos)
 {
     if (ll == NULL || ll->head == NULL || pos >= ll->total || pos < 0)
     {
         return NULL;
     }
 
-    node_s *node = ll->head;
+    ll_node_s *node = ll->head;
 
     for (size_t i = 0; i < pos; i++)
     {

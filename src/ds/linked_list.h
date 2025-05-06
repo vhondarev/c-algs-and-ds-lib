@@ -4,35 +4,35 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-typedef struct node_s
+typedef struct ll_node_s
 {
     void *data;
-    struct node_s *next;
-} node_s;
+    struct ll_node_s *next;
+} ll_node_s;
 
 typedef struct
 {
-    node_s *head;
-    node_s *tail;
+    ll_node_s *head;
+    ll_node_s *tail;
     unsigned int total;
 } ll_s;
 
-node_s *create_node(void *data);
+ll_node_s *ll_create_node(void *data);
 
-void destroy_node(node_s *node);
+void ll_destroy_node(ll_node_s *node);
 
 ll_s *ll_create();
 
 void ll_destroy(ll_s *ll);
 
-bool ll_append(ll_s *ll, node_s *node);
+bool ll_append(ll_s *ll, ll_node_s *node);
 
-bool ll_prepend(ll_s *ll, node_s *node);
+bool ll_prepend(ll_s *ll, ll_node_s *node);
 
-bool ll_insert(ll_s *ll, node_s *node, size_t pos);
+bool ll_insert(ll_s *ll, ll_node_s *node, size_t pos);
 
 bool ll_delete(ll_s *ll, size_t pos);
 
-node_s *ll_get_node_at(ll_s *ll, size_t pos);
+ll_node_s *ll_get_node_at(ll_s *ll, size_t pos);
 
 #endif

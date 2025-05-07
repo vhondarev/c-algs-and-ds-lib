@@ -1,11 +1,11 @@
 #include <assert.h>
 #include <stdio.h>
 
-#include "dyn_stack.h"
+#include "stack_dyarr.h"
 
-void assert_dyn_stack()
+void assert_stack_dyarr()
 {
-    dyn_stack_s *s = dyn_stack_create();
+    stack_dyarr_s *s = stack_dyarr_create();
     assert(s != NULL);
     printf("[OK] Stack created\n");
 
@@ -16,36 +16,36 @@ void assert_dyn_stack()
     *v2 = 2;
     *v3 = 3;
 
-    assert(dyn_stack_push(s, v1) == true);
-    assert(dyn_stack_push(s, v2) == true);
-    assert(dyn_stack_push(s, v3) == true);
+    assert(stack_dyarr_push(s, v1) == true);
+    assert(stack_dyarr_push(s, v2) == true);
+    assert(stack_dyarr_push(s, v3) == true);
     printf("[OK] Pushed 3 elements\n");
 
-    int *peek = (int *)dyn_stack_peak(s);
+    int *peek = (int *)stack_dyarr_peak(s);
     assert(*peek == 3);
     printf("[OK] Peeked value is 3 (last pushed)\n");
 
-    assert(dyn_stack_pop(s) == true);
-    peek = (int *)dyn_stack_peak(s);
+    assert(stack_dyarr_pop(s) == true);
+    peek = (int *)stack_dyarr_peak(s);
     assert(*peek == 2);
     printf("[OK] Popped once, peek is now 2\n");
 
-    assert(dyn_stack_pop(s) == true);
-    peek = (int *)dyn_stack_peak(s);
+    assert(stack_dyarr_pop(s) == true);
+    peek = (int *)stack_dyarr_peak(s);
     assert(*peek == 1);
     printf("[OK] Popped again, peek is now 1\n");
 
-    assert(dyn_stack_pop(s) == true);
-    assert(dyn_stack_peak(s) == NULL);
+    assert(stack_dyarr_pop(s) == true);
+    assert(stack_dyarr_peak(s) == NULL);
     printf("[OK] Popped last element, stack is now empty\n");
 
-    dyn_stack_destroy(s);
+    stack_dyarr_destroy(s);
     printf("[OK] Stack destroyed\n");
 }
 
 int main()
 {
-    assert_dyn_stack();
+    assert_stack_dyarr();
 
     return EXIT_SUCCESS;
 }

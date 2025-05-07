@@ -1,16 +1,16 @@
-#include "dyn_stack.h"
+#include "stack_dyarr.h"
 
-dyn_stack_s *dyn_stack_create()
+stack_dyarr_s *stack_dyarr_create()
 {
     return dyn_arr_create();
 }
 
-bool dyn_stack_push(dyn_stack_s *s, void *value)
+bool stack_dyarr_push(stack_dyarr_s *s, void *data)
 {
-    return dyn_arr_append(s, value);
+    return dyn_arr_append(s, data);
 }
 
-bool dyn_stack_pop(dyn_stack_s *s)
+bool stack_dyarr_pop(stack_dyarr_s *s)
 {
     if (s == NULL)
     {
@@ -19,7 +19,7 @@ bool dyn_stack_pop(dyn_stack_s *s)
     return dyn_arr_remove_at(s, s->size - 1);
 }
 
-void *dyn_stack_peak(dyn_stack_s *s)
+void *stack_dyarr_peak(stack_dyarr_s *s)
 {
     if (s == NULL)
     {
@@ -28,7 +28,7 @@ void *dyn_stack_peak(dyn_stack_s *s)
     return dyn_arr_get_at(s, s->size - 1);
 };
 
-void dyn_stack_destroy(dyn_stack_s *s)
+void stack_dyarr_destroy(stack_dyarr_s *s)
 {
     return dyn_arr_destroy(s);
 }

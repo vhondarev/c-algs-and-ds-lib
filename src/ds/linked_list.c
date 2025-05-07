@@ -3,6 +3,11 @@
 ll_node_s *ll_create_node(void *data)
 {
     ll_node_s *node = malloc(sizeof(ll_node_s));
+    if (node == NULL)
+    {
+        return NULL;
+    }
+
     node->data = data;
     node->next = NULL;
 

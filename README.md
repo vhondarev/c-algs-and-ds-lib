@@ -13,7 +13,7 @@ I'm building this mostly to practice my C skills.
 - [x] Linked List (singly and doubly)
 - [x] Stack
 - [x] Queue
-- [ ] Circular Queue
+- [x] Circular Queue
 - [ ] Priority Queue
 
 #### Trees

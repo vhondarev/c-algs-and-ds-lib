@@ -35,7 +35,7 @@ void assert_queue_basic()
     assert(queue_circ_empty(q) == false);
     assert(queue_circ_dequeue(q));
     assert(queue_circ_empty(q) == true);
-    printf("[OK] - Enqueue and dequeue first elements works\n");
+    printf("[OK] - Enqueue and dequeue one element\n");
 
     assert(queue_circ_enqueue(q, a));
     assert(q->data[q->back] == a);
@@ -61,7 +61,7 @@ void assert_queue_basic()
     assert(queue_circ_dequeue(q));
     assert(queue_circ_empty(q));
     assert(queue_circ_dequeue(q) == false);
-    printf("[OK] - Dequeued all elements, queue is empty again\n");
+    printf("[OK] - Dequeued all elements, queue is empty\n");
 
     free(a);
     free(b);

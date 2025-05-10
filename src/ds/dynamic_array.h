@@ -9,22 +9,22 @@ typedef struct
     void **data;
     size_t size;
     size_t capacity;
-} dyn_arr_s;
+} darr_s;
 
-dyn_arr_s *dyn_arr_create();
+darr_s *darr_create();
 
-bool dyn_arr_init_mem(dyn_arr_s *arr);
+bool darr_init_mem(darr_s *arr);
 
-int dyn_arr_realloc_mem(dyn_arr_s *arr);
+int darr_realloc_mem(darr_s *arr);
 
-void dyn_arr_destroy(dyn_arr_s *arr);
+void darr_destroy(darr_s *arr);
 
-bool dyn_arr_append(dyn_arr_s *arr, void *value);
+bool darr_append(darr_s *arr, void *value);
 
-bool dyn_arr_prepend(dyn_arr_s *arr, void *value);
+bool darr_prepend(darr_s *arr, void *value);
 
-bool dyn_arr_remove_at(dyn_arr_s *arr, int index);
+bool darr_remove_at(darr_s *arr, int index);
 
-void *dyn_arr_get_at(dyn_arr_s *arr, int index);
+void *darr_get_at(darr_s *arr, int index);
 
 #endif

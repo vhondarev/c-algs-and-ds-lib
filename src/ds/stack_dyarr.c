@@ -2,12 +2,12 @@
 
 stack_dyarr_s *stack_dyarr_create()
 {
-    return dyn_arr_create();
+    return darr_create();
 }
 
 bool stack_dyarr_push(stack_dyarr_s *s, void *data)
 {
-    return dyn_arr_append(s, data);
+    return darr_append(s, data);
 }
 
 bool stack_dyarr_pop(stack_dyarr_s *s)
@@ -16,7 +16,7 @@ bool stack_dyarr_pop(stack_dyarr_s *s)
     {
         return false;
     }
-    return dyn_arr_remove_at(s, s->size - 1);
+    return darr_remove_at(s, s->size - 1);
 }
 
 void *stack_dyarr_peak(stack_dyarr_s *s)
@@ -25,10 +25,10 @@ void *stack_dyarr_peak(stack_dyarr_s *s)
     {
         return false;
     }
-    return dyn_arr_get_at(s, s->size - 1);
+    return darr_get_at(s, s->size - 1);
 };
 
 void stack_dyarr_destroy(stack_dyarr_s *s)
 {
-    return dyn_arr_destroy(s);
+    return darr_destroy(s);
 }

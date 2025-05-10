@@ -1,8 +1,8 @@
 #include "linked_list.h"
 
-l_list_node_s *l_list_create_node(void *data)
+llist_node_s *llist_create_node(void *data)
 {
-    l_list_node_s *node = malloc(sizeof(l_list_node_s));
+    llist_node_s *node = malloc(sizeof(llist_node_s));
     if (node == NULL)
     {
         return NULL;
@@ -14,7 +14,7 @@ l_list_node_s *l_list_create_node(void *data)
     return node;
 }
 
-void l_list_destroy_node(l_list_node_s *node)
+void llist_destroy_node(llist_node_s *node)
 {
     if (node == NULL)
     {
@@ -29,9 +29,9 @@ void l_list_destroy_node(l_list_node_s *node)
     free(node);
 }
 
-l_list_s *l_list_create()
+llist_s *llist_create()
 {
-    l_list_s *ll = malloc(sizeof(l_list_s));
+    llist_s *ll = malloc(sizeof(llist_s));
     if (ll == NULL)
     {
         return NULL;
@@ -44,26 +44,26 @@ l_list_s *l_list_create()
     return ll;
 }
 
-void l_list_destroy(l_list_s *ll)
+void llist_destroy(llist_s *ll)
 {
     if (ll == NULL)
     {
         return;
     }
 
-    l_list_node_s *current = ll->head;
+    llist_node_s *current = ll->head;
 
     while (current != NULL)
     {
-        l_list_node_s *next = current->next;
-        l_list_destroy_node(current);
+        llist_node_s *next = current->next;
+        llist_destroy_node(current);
         current = next;
     }
 
     free(ll);
 }
 
-bool l_list_append(l_list_s *ll, l_list_node_s *node)
+bool llist_append(llist_s *ll, llist_node_s *node)
 {
     if (ll == NULL || node == NULL)
         return false;
@@ -82,7 +82,7 @@ bool l_list_append(l_list_s *ll, l_list_node_s *node)
     return true;
 }
 
-bool l_list_prepend(l_list_s *ll, l_list_node_s *node)
+bool llist_prepend(llist_s *ll, llist_node_s *node)
 {
     if (ll == NULL || node == NULL)
     {
@@ -105,21 +105,21 @@ bool l_list_prepend(l_list_s *ll, l_list_node_s *node)
     }
 }
 
-bool l_list_insert_before_at(l_list_s *ll, l_list_node_s *node, size_t pos)
+bool llist_insert_before_at(llist_s *ll, llist_node_s *node, size_t pos)
 {
     if (ll == NULL || node == NULL || pos > ll->total)
     {
         return false;
     }
 
-    else if (pos == 0 || ll->head == NULL)
+    else if (pos == 0)
     {
-        return l_list_prepend(ll, node);
+        return llist_prepend(ll, node);
     }
     else
     {
-        l_list_node_s *prev = ll->head;
-        l_list_node_s *next = prev->next;
+        llist_node_s *prev = ll->head;
+        llist_node_s *next = prev->next;
 
         for (size_t i = 1; i < pos; i++)
         {
@@ -135,14 +135,14 @@ bool l_list_insert_before_at(l_list_s *ll, l_list_node_s *node, size_t pos)
     }
 }
 
-bool l_list_delete_at(l_list_s *ll, size_t pos)
+bool llist_delete_at(llist_s *ll, size_t pos)
 {
     if (ll == NULL || ll->head == NULL || pos >= ll->total)
     {
         return false;
     }
 
-    l_list_node_s *tmp;
+    llist_node_s *tmp;
 
     if (pos == 0)
     {
@@ -156,7 +156,7 @@ bool l_list_delete_at(l_list_s *ll, size_t pos)
     }
     else
     {
-        l_list_node_s *prev = ll->head;
+        llist_node_s *prev = ll->head;
 
         for (size_t i = 1; i < pos; i++)
         {
@@ -172,20 +172,20 @@ bool l_list_delete_at(l_list_s *ll, size_t pos)
         }
     }
 
-    l_list_destroy_node(tmp);
+    llist_destroy_node(tmp);
     ll->total--;
 
     return true;
 }
 
-l_list_node_s *l_list_get_node_at(l_list_s *ll, size_t pos)
+llist_node_s *llist_get_node_at(llist_s *ll, size_t pos)
 {
-    if (ll == NULL || ll->head == NULL || pos >= ll->total || pos < 0)
+    if (ll == NULL || ll->head == NULL || pos >= ll->total)
     {
         return NULL;
     }
 
-    l_list_node_s *node = ll->head;
+    llist_node_s *node = ll->head;
 
     for (size_t i = 0; i < pos; i++)
     {

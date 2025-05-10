@@ -1,8 +1,8 @@
 #include "linked_list_double.h"
 
-dl_list_node_s *dl_list_create_node(void *data)
+dllist_node_s *dllist_create_node(void *data)
 {
-    dl_list_node_s *n = malloc(sizeof(dl_list_node_s));
+    dllist_node_s *n = malloc(sizeof(dllist_node_s));
     if (n == NULL)
     {
         return NULL;
@@ -14,7 +14,7 @@ dl_list_node_s *dl_list_create_node(void *data)
     return n;
 }
 
-void dl_list_destroy_node(dl_list_node_s *node)
+void dllist_destroy_node(dllist_node_s *node)
 {
     if (node == NULL)
     {
@@ -29,9 +29,9 @@ void dl_list_destroy_node(dl_list_node_s *node)
     free(node);
 }
 
-dl_list_s *dl_list_create()
+dllist_s *dllist_create()
 {
-    dl_list_s *dll = malloc(sizeof(dl_list_s));
+    dllist_s *dll = malloc(sizeof(dllist_s));
 
     if (dll == NULL)
     {
@@ -45,17 +45,17 @@ dl_list_s *dl_list_create()
     return dll;
 }
 
-void dl_list_destroy(dl_list_s *dll)
+void dllist_destroy(dllist_s *dll)
 {
     if (dll != NULL)
     {
-        dl_list_node_s *current = dll->head;
-        dl_list_node_s *next;
+        dllist_node_s *current = dll->head;
+        dllist_node_s *next;
 
         while (current != NULL)
         {
             next = current->next;
-            dl_list_destroy_node(current);
+            dllist_destroy_node(current);
             current = next;
         }
 
@@ -63,11 +63,11 @@ void dl_list_destroy(dl_list_s *dll)
     }
 }
 
-int dl_list_append(dl_list_s *dll, dl_list_node_s *node)
+bool dllist_append(dllist_s *dll, dllist_node_s *node)
 {
     if (dll == NULL || node == NULL)
     {
-        return -1;
+        return false;
     }
 
     if (dll->head == NULL)
@@ -84,14 +84,14 @@ int dl_list_append(dl_list_s *dll, dl_list_node_s *node)
 
     dll->total++;
 
-    return dll->total - 1;
+    return true;
 }
 
-int dl_list_prepend(dl_list_s *dll, dl_list_node_s *node)
+bool dllist_prepend(dllist_s *dll, dllist_node_s *node)
 {
     if (dll == NULL || node == NULL)
     {
-        return -1;
+        return false;
     }
 
     if (dll->head == NULL)
@@ -108,10 +108,10 @@ int dl_list_prepend(dl_list_s *dll, dl_list_node_s *node)
 
     dll->total++;
 
-    return 0;
+    return true;
 }
 
-bool dl_list_insert_before_at(dl_list_s *dll, dl_list_node_s *node, size_t pos)
+bool dllist_insert_before_at(dllist_s *dll, dllist_node_s *node, size_t pos)
 {
     if (dll == NULL || node == NULL || pos >= dll->total)
     {
@@ -120,10 +120,10 @@ bool dl_list_insert_before_at(dl_list_s *dll, dl_list_node_s *node, size_t pos)
 
     if (pos == 0)
     {
-        return dl_list_prepend(dll, node) != -1;
+        return dllist_prepend(dll, node);
     }
 
-    dl_list_node_s *n = dl_list_get_node_at(dll, pos);
+    dllist_node_s *n = dllist_get_node_at(dll, pos);
 
     node->next = n;
     node->prev = n->prev;
@@ -134,14 +134,14 @@ bool dl_list_insert_before_at(dl_list_s *dll, dl_list_node_s *node, size_t pos)
     return true;
 }
 
-dl_list_node_s *dl_list_get_node_at(dl_list_s *dll, size_t pos)
+dllist_node_s *dllist_get_node_at(dllist_s *dll, size_t pos)
 {
     if (dll == NULL || pos >= dll->total)
     {
         return NULL;
     }
 
-    dl_list_node_s *n;
+    dllist_node_s *n;
 
     if (pos < dll->total / 2)
     {
@@ -163,14 +163,14 @@ dl_list_node_s *dl_list_get_node_at(dl_list_s *dll, size_t pos)
     return n;
 }
 
-bool dl_list_delete_at(dl_list_s *dll, size_t pos)
+bool dllist_delete_at(dllist_s *dll, size_t pos)
 {
     if (dll == NULL || pos >= dll->total)
     {
         return false;
     }
 
-    dl_list_node_s *n = dl_list_get_node_at(dll, pos);
+    dllist_node_s *n = dllist_get_node_at(dll, pos);
 
     if (n->prev)
     {
@@ -190,15 +190,15 @@ bool dl_list_delete_at(dl_list_s *dll, size_t pos)
         dll->tail = n->prev;
     }
 
-    dl_list_destroy_node(n);
+    dllist_destroy_node(n);
     dll->total--;
 
     return true;
 }
 
-bool dl_list_delete_node(dl_list_s *dll, dl_list_node_s *node)
+bool dllist_delete_node(dllist_s *dll, dllist_node_s *node)
 {
-    if (dll == NULL || node == NULL || dll->head == NULL || !dl_list_node_in(dll, node))
+    if (dll == NULL || node == NULL || dll->head == NULL || !dllist_node_in(dll, node))
     {
         return false;
     }
@@ -221,20 +221,20 @@ bool dl_list_delete_node(dl_list_s *dll, dl_list_node_s *node)
         dll->tail = node->prev;
     }
 
-    dl_list_destroy_node(node);
+    dllist_destroy_node(node);
     dll->total--;
 
     return true;
 }
 
-bool dl_list_node_in(dl_list_s *dll, dl_list_node_s *node)
+bool dllist_node_in(dllist_s *dll, dllist_node_s *node)
 {
     if (dll == NULL || dll->head == NULL || node == NULL)
     {
         return false;
     }
 
-    dl_list_node_s *tmp = dll->head;
+    dllist_node_s *tmp = dll->head;
 
     while (tmp != NULL)
     {

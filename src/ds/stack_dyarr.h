@@ -3,7 +3,7 @@
 
 #include "dynamic_array.h"
 
-typedef dyn_arr_s stack_dyarr_s;
+typedef darr_s stack_dyarr_s;
 
 stack_dyarr_s *stack_dyarr_create();
 

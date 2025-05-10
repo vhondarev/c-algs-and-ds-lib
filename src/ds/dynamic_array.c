@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-dyn_arr_s *dyn_arr_create()
+darr_s *darr_create()
 {
-    dyn_arr_s *arr = malloc(sizeof(dyn_arr_s));
+    darr_s *arr = malloc(sizeof(darr_s));
 
     if (arr == NULL)
     {
@@ -18,7 +18,7 @@ dyn_arr_s *dyn_arr_create()
     return arr;
 }
 
-bool dyn_arr_init_mem(dyn_arr_s *arr)
+bool darr_init_mem(darr_s *arr)
 {
     if (arr == NULL || arr->data != NULL)
     {
@@ -36,7 +36,7 @@ bool dyn_arr_init_mem(dyn_arr_s *arr)
     return true;
 }
 
-int dyn_arr_realloc_mem(dyn_arr_s *arr)
+int darr_realloc_mem(darr_s *arr)
 {
     if (arr == NULL || arr->capacity == 0)
     {
@@ -74,7 +74,7 @@ int dyn_arr_realloc_mem(dyn_arr_s *arr)
     return 1;
 }
 
-void dyn_arr_destroy(dyn_arr_s *arr)
+void darr_destroy(darr_s *arr)
 {
     if (arr != NULL)
     {
@@ -88,7 +88,7 @@ void dyn_arr_destroy(dyn_arr_s *arr)
     }
 }
 
-bool dyn_arr_append(dyn_arr_s *arr, void *value)
+bool darr_append(darr_s *arr, void *value)
 {
     if (arr == NULL)
     {
@@ -96,13 +96,13 @@ bool dyn_arr_append(dyn_arr_s *arr, void *value)
     }
     else if (arr->data == NULL)
     {
-        if (!dyn_arr_init_mem(arr))
+        if (!darr_init_mem(arr))
         {
             return false;
         }
     }
 
-    if (dyn_arr_realloc_mem(arr) == -1)
+    if (darr_realloc_mem(arr) == -1)
     {
         return false;
     }
@@ -112,7 +112,7 @@ bool dyn_arr_append(dyn_arr_s *arr, void *value)
     return true;
 }
 
-bool dyn_arr_prepend(dyn_arr_s *arr, void *value)
+bool darr_prepend(darr_s *arr, void *value)
 {
     if (arr == NULL)
     {
@@ -120,13 +120,13 @@ bool dyn_arr_prepend(dyn_arr_s *arr, void *value)
     }
     else if (arr->data == NULL)
     {
-        if (!dyn_arr_init_mem(arr))
+        if (!darr_init_mem(arr))
         {
             return false;
         }
     }
 
-    if (dyn_arr_realloc_mem(arr) == -1)
+    if (darr_realloc_mem(arr) == -1)
     {
         return false;
     }
@@ -141,7 +141,7 @@ bool dyn_arr_prepend(dyn_arr_s *arr, void *value)
     return true;
 }
 
-bool dyn_arr_remove_at(dyn_arr_s *arr, int index)
+bool darr_remove_at(darr_s *arr, int index)
 {
     if (arr == NULL || arr->data == NULL || arr->size <= index)
     {
@@ -158,12 +158,12 @@ bool dyn_arr_remove_at(dyn_arr_s *arr, int index)
     arr->size--;
     arr->data[arr->size] = NULL;
 
-    dyn_arr_realloc_mem(arr);
+    darr_realloc_mem(arr);
 
     return true;
 }
 
-void *dyn_arr_get_at(dyn_arr_s *arr, int index)
+void *darr_get_at(darr_s *arr, int index)
 {
     if (arr == NULL || arr->data == NULL || arr->size <= index)
     {
